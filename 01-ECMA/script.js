@@ -1,5 +1,6 @@
 function callTwitter() {
 	var query = document.getElementById('myQuery').value;
+	var that = this;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', '/search?q='+query, true);
@@ -21,11 +22,25 @@ function callTwitter() {
 			li.appendChild(img);
 			li.appendChild(b);
 			li.appendChild(span);
+			setListener(li);
 			responseDiv.appendChild(li);
 		}
 	}
 	xhr.send(); 
 }
+
+function setListener(li){
+	var imgs = li.getElementsByTagName("img");
+	var img = imgs[0];
+	img.setAttribute('style','opacity:0.4');
+	li.onmouseover=function(event){
+		event.currentTarget.getElementsByTagName("img")[0].setAttribute('style','opacity:1');
+	};
+	li.onmouseout=function(event){
+		event.currentTarget.getElementsByTagName("img")[0].setAttribute('style','opacity:0.4');
+	};
+}
+
 function init(){
 	document.getElementById('myQuery').addEventListener('keyup', function(e){
 		if (e.keyCode==13){
