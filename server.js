@@ -1,6 +1,8 @@
 var express = require("express");
 var http = require("http");
 var url = require('url');
+var fs = require('fs');
+var querystring = require('querystring');
  
 var app = express();
 
@@ -10,7 +12,26 @@ app.configure(
 		app.use(express.static(__dirname));
 		app.use(express.errorHandler({ dumpExceptions:true, showStack:true }));
 	}).listen(8888);
+var cities = {};
+fs.readFile('villes.json','utf8', function (err, data) {
+  if (err) throw err;
+  cities = JSON.parse(data).CITIES;
+  console.log("Nb de villes chargés : "+cities.length);
+});
 
+app.get('/city', function(request, response){
+	var query = querystring.parse(url.parse(request.url).query).city;
+	console.log("Recherche : "+query);
+	var arr=[];
+	for(var i=0,nbCities=cities.length;i<nbCities;i++){
+		if (cities[i].toString().toLowerCase().slice(0, query.length) == query.toString().toLowerCase()){
+			arr.push(cities[i]);
+		}
+	}
+	
+	response.json(arr);
+	
+});
 app.get('/search', function(request, response){
 
 	var query = url.parse(request.url).search;

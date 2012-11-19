@@ -50,5 +50,6 @@ function init(){
 	})
 	document.getElementById('myBtn').addEventListener('click', callTwitter);
 }
-
-document.addEventListener("DOMContentLoaded", init, false);
+$(document).ready(function(){
+	init();
+});
