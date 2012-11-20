@@ -11,14 +11,15 @@ function callTwitter() {
 			responseDiv.removeChild(responseDiv.firstChild);
 		}
 		
-		for (var val in results){
+		for (var val, i = 0, length=results.length; i < length; i++){
 			var li = document.createElement("li");
 			var img = document.createElement("img");
-			img.setAttribute("src",results[val].profile_image_url);
+			val = results[i];
+			img.setAttribute("src",val.profile_image_url);
 			var b = document.createElement("b");
-			b.textContent=results[val].from_user+":";
+			b.textContent=val.from_user+":";
 			var span = document.createElement("span");
-			span.textContent=results[val].text;
+			span.textContent=val.text;
 			li.appendChild(img);
 			li.appendChild(b);
 			li.appendChild(span);
@@ -48,6 +49,14 @@ function init(){
 		}
 	})
 	document.getElementById('myBtn').addEventListener('click', callTwitter);
+	var divs = document.getElementsByTagName('div');
+	var pattern = new RegExp("(^|\\s)backIcon(\\s|$)"), i, j;
+	for (var i=0, length=divs.length;i<length;i++) {
+		if (pattern.test(divs[i].className)){
+			divs[i].addEventListener('click', function(){window.history.back();});
+		}
+	}
+
 }
 
 document.addEventListener("DOMContentLoaded", init, false);
