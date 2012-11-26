@@ -32,6 +32,18 @@ a:hover {
 	
 }
 
+fieldset{
+	border:0;
+}
+
+fieldset * {
+	display: inline-block;
+}
+
+label {
+	min-width:100px;
+}
+
 .iconTwitter{
 	height:32px;
 	width:32px;

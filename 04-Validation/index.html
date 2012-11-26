@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+		<script src="script.js"></script>
+		<link rel="stylesheet" type="text/css" href="../style.css"></link>
+	</head>
+	<body>
+		<div class="backIcon"></div>
+		<div>
+			Le but de cet exercice est de mettre en place une validation côté client avant le post du formulaire.
+
+			Pour connaître la validation à appliquer, regarder les attributs des "inputs" (les attributs sont ici classé par ordre de priorité [plus prioritaire en premier]) : <br />
+			- data-required : true/false [le champ de doit pas être vide ou au moins 1 sélection] <br />
+			- data-validation : text/mail/number [le type à valider]<br />
+			<br />
+			L'affichage de l'erreur est à la convenance ... 
+		</div>
+		<form action="#">
+			<fieldset>
+				<label for="civilite">* Civilité</label><br />
+				<input type="radio" name="civilite" value="Mr" data-required="true">Mr</input> <br />
+				<input type="radio" name="civilite" value="Mme" data-required="true">Mme</input><br />
+			</fieldset>
+			<fieldset>
+				<label for="nom">* Nom :</label>
+				<input type="text" name="nom" data-required="true" data-validation="text" />
+			</fieldset>
+			<fieldset>
+				<label for="prenom">Prénom :</label>
+				<input type="text" name="prenom" data-required="false" data-validation="text" />
+			</fieldset>
+			<fieldset>
+				<label for="email">* Email :</label>
+				<input type="text" name="email" data-required="true" data-validation="mail" />
+			</fieldset>
+			<fieldset>
+				<label for="age">Age :</label>
+				<input type="text" name="age" data-required="false" data-validation="number" />
+			</fieldset>
+			<fieldset>
+				<label for="loisir">* Loisir :</label><br />
+				<input type="checkbox" name="loisir" data-required="true" value="Sport">Sport</input><br />
+				<input type="checkbox" name="loisir" data-required="true" value="Cinéma">Cinéma</input><br />
+				<input type="checkbox" name="loisir" data-required="true" value="Lecture">Lecture</input><br />
+			</fieldset>
+
+			<input type="submit" value="Envoyer" />
+		</form>
+	</body>
+</html>
