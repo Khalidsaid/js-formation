@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="../style.css"></link>
+	<script language="javascript" type="text/javascript">
+		function Car(speed) {
+			this.speed = speed;
+		}
+		Car.prototype = {
+			brand: 'unknown',
+			model: 'unknown',
+			speed: 0,
+			startEngine: function() {
+				console.log('Let\'s get this '+this.brand+' '+this.model+' up to '+this.speed+'mph');
+			}
+		};
+
+		function DeLoreanDmc12(speed) {
+			this.speed = speed;
+		}
+		DeLoreanDmc12.prototype = Object.create(new Car(), {
+			brand: {value: 'DeLorean', enumerable: true, configurable: true, writable: true},
+			model: {value: 'DMC-12', enumerable: true, configurable: true, writable: true}
+		});
+
+		console.log('new Car(50):');
+		var someCar = new Car(50);
+		console.log('Brand: '+someCar.brand);
+		console.log('Model: '+someCar.model);
+		someCar.startEngine();
+
+		console.log('-');
+
+		console.log('new DeLoreanDmc12(88)');
+		var myCar = new DeLoreanDmc12(88);
+		console.log('Brand: '+myCar.brand);
+		console.log('Model: '+myCar.model);
+		myCar.startEngine();
+	</script>
+</head>
+<body>
+	<h1>Regardez votre console</h1>
+</body>
+</html>
