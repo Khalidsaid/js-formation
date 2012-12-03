@@ -1,22 +1,30 @@
 $(document).ready(function(){
 	var timeout;
-	$('#search').keyup(function(){
+	var $input = $(document.getElementById('search'));
+	var $liste = $(document.getElementById('liste'));
+	var $nbResult = $(document.getElementById('nbResult'));
+	$input.keyup(function(){
 		window.clearTimeout(timeout);
 		timeout = window.setTimeout(function(){
-			var val = $('#search').val();
-			$.get('/city?city='+val, function(data){
-				$('#nbResult').html(data.length);
-				$('#liste').empty();
-				if (data.length<20){				
-					for (var val, i = 0, length=data.length; i < length; i++){
-						$('#liste').append('<li>'+data[i]+'</li>');
+			var val = $input.val();
+			$liste.empty();
+			$nbResult.html('-');
+			if (val!=''){
+				$.get('/city?city='+val, function(data){
+					$nbResult.html(data.length);
+					if (data.length<20){				
+						for (var val, i = 0, length=data.length; i < length; i++){
+							$liste.append('<li>'+data[i]+'</li>');
+						}
 					}
-				}
-			});
+				});
+			}else{
+				
+			}
 		}, 500);
 		
 	});
-	$('.backIcon').click('click', function(){
+	$('.backIcon').on('click', function(){
 		window.history.back();
 	});
 });
